@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Newsletter from './components/Newsletter.vue'
+import Newsletter from "./components/Newsletter.vue";
 </script>
 
 <template>
