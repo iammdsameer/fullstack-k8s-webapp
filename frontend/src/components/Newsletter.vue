@@ -90,5 +90,12 @@ watch(typedInput, async function () {
         "{{ typedInput }}" is not a valid email.
       </p>
     </form>
+    <RouterLink class="block text-sm underline hover:text-sky-500" to="/subscribers">View Subscribers</RouterLink>
   </div>
 </template>
+
+<script lang="ts">
+export default {
+  name: 'Newsletter'
+}
+</script>

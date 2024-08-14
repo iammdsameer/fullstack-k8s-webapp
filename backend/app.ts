@@ -11,7 +11,10 @@ app.use(express.json());
 
 mongoose
   .connect(process.env.MONGODB_URI || "mongodb://localhost:27017/test")
-  .then(() => console.log("Connected to MongoDB!"));
+  .then(() => console.log("Connected to MongoDB!"))
+  .catch(() =>
+    console.log("Could not connect to database! Check configuration")
+  );
 
 const schema = new mongoose.Schema({
   email: {

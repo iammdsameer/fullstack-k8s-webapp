@@ -1,19 +1,39 @@
-<script setup>
+<script setup lang="ts">
 import { onMounted, ref } from "vue";
-
-let emailList = ref([]);
+let emailList = ref<{ email: string }[]>([]);
+let loading = ref(true);
 
 onMounted(() => {
-  fetch("http://localhost:8000/api/list")
-    .then((response) => response.json())
-    .then((data) => emailList.value = data);
+  new Promise(resolve => setTimeout(resolve, 1500))
+    .then(() => fetch("http://localhost:8000/api/list")
+      .then((response) => response.json())
+      .then((data) => {
+        emailList.value = data
+        loading.value = false;
+      }));
 });
 </script>
+
 <template>
-  <h3 class="text-white text-xl">List of Subscribers</h3>
-  <ol class="list-decimal">
-    <li v-for="(item, index) in emailList" :key="index" class="text-sm text-white">
-      {{ item.email }}
-    </li>
-  </ol>
+  <div v-if="loading">
+    <span class="relative flex h-16 w-16">
+      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-slate-200 opacity-75"></span>
+      <span class="relative inline-flex rounded-full h-16 w-16 bg-slate-200"></span>
+    </span>
+  </div>
+  <div v-if="!loading">
+    <h3 class="text-white text-xl">List of Subscribers</h3>
+    <ol class="list-decimal">
+      <li v-for="(item, index) in emailList" :key="index" class="text-sm text-white">
+        {{ item.email }}
+      </li>
+    </ol>
+    <RouterLink class="mt-5 block text-sm underline text-white hover:font-medium" to="/">Go Back</RouterLink>
+  </div>
 </template>
+
+<script lang="ts">
+export default {
+  name: "Subscribers",
+};
+</script>

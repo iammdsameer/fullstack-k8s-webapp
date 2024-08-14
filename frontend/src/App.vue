@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import Newsletter from "./components/Newsletter.vue";
-import Subscribers from "./components/Subscribers.vue";
+import { RouterView } from 'vue-router'
+
 </script>
 
 <template>
-  <Newsletter person="Sameer" />
-  <Subscribers />
+  <RouterView />
 </template>
