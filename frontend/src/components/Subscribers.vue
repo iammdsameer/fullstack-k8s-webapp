@@ -1,13 +1,16 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
-let emailList = ref<{ email: string }[]>([]);
+
+type Email = { email: string }[];
+
+let emailList = ref<Email>([]);
 let loading = ref(true);
 
 onMounted(() => {
   new Promise(resolve => setTimeout(resolve, 1500))
     .then(() => fetch("http://localhost:8000/api/list")
       .then((response) => response.json())
-      .then((data) => {
+      .then((data: Email) => {
         emailList.value = data
         loading.value = false;
       }));
