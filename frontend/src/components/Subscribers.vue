@@ -6,7 +6,7 @@ type Email = { email: string }[];
 let emailList = ref<Email>([]);
 let loading = ref(true);
 
-const API_URL = import.meta.env.API_URL
+const API_URL = import.meta.env.VITE_API_URL
 
 onMounted(() => {
   new Promise(resolve => setTimeout(resolve, 1500))

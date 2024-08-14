@@ -5,12 +5,13 @@ var cors = require("cors");
 
 const app = express();
 const PORT = process.env.PORT || 8000;
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/test";
 
 app.use(cors());
 app.use(express.json());
 
 mongoose
-  .connect(process.env.MONGODB_URI || "mongodb://localhost:27017/test")
+  .connect(MONGODB_URI)
   .then(() => console.log("Connected to MongoDB!"))
   .catch(() =>
     console.log("Could not connect to database! Check configuration")
