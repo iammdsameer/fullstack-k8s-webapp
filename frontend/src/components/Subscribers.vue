@@ -6,9 +6,11 @@ type Email = { email: string }[];
 let emailList = ref<Email>([]);
 let loading = ref(true);
 
+const API_URL = import.meta.env.API_URL
+
 onMounted(() => {
   new Promise(resolve => setTimeout(resolve, 1500))
-    .then(() => fetch("http://localhost:8000/api/list")
+    .then(() => fetch(`${API_URL}/list`)
       .then((response) => response.json())
       .then((data: Email) => {
         emailList.value = data

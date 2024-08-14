@@ -9,10 +9,12 @@ const submitting = ref(false);
 const isInvalidEmail = ref(false);
 const responseText = ref("");
 
+const API_URL = import.meta.env.API_URL
+
 async function subscribe() {
   if (typedInput.value === "" || isInvalidEmail.value) return;
   submitting.value = true;
-  await fetch(`http://localhost:8000/api/new`, {
+  await fetch(`${API_URL}/new`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email: typedInput.value }),

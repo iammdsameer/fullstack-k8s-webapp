@@ -6,6 +6,7 @@ import Subscribers from "./components/Subscribers.vue";
 
 import "./style.css";
 
+const PERSON_NAME = import.meta.env.VITE_PERSON_NAME || "Ricky";
 const router = createRouter({
   history: createWebHistory(),
   routes: [
@@ -13,7 +14,7 @@ const router = createRouter({
       path: "/",
       name: "newsletter",
       component: Newsletter,
-      props: { person: "Sameer" },
+      props: { person: PERSON_NAME },
     },
     {
       path: "/subscribers",
