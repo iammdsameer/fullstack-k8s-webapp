@@ -1,0 +1,40 @@
+name: newsletter-webapp
+
+services:
+  frontend:
+    container_name: frontend
+    build: ./frontend
+    ports:
+      - 8008:80
+
+  backend:
+    container_name: backend
+    build: ./backend
+    environment:
+      - PORT=9000
+      - MONGODB_URI=mongodb://mongo:27017/newsletter
+    ports:
+      - 9000:9000
+    networks:
+      - net
+    depends_on:
+      - db
+
+  db:
+    container_name: mongo
+    image: mongo:latest
+    networks:
+      - net
+    volumes:
+      - storage:/data/db
+
+networks:
+  net:
+    name: net
+    ipam:
+      config:
+        - subnet: 10.0.0.0/16
+          ip_range: 10.0.0.0/24
+
+volumes:
+  storage:
