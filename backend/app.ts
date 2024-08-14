@@ -1,10 +1,12 @@
 import "dotenv/config";
 import express from "express";
 import mongoose from "mongoose";
+var cors = require("cors");
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8000;
 
+app.use(cors());
 app.use(express.json());
 
 mongoose
@@ -22,15 +24,21 @@ const Newsletter = mongoose.model("Newsletter", schema);
 
 app.post("/api/new", function (req, res) {
   const { email } = req.body;
-  console.log({ email });
   const doc = new Newsletter({ email });
   doc
     .save()
-    .then(() => res.send("You are officially added to the newsletter!"))
-    .catch((err) => res.send("Error"));
+    .then(() =>
+      res.send({
+        status: true,
+        message: "You are now officially a part of the newsletter!",
+      })
+    )
+    .catch((_) =>
+      res.send({ status: false, message: "Oops! Something went wrong!" })
+    );
 });
 
-app.get("/api/list", async function (req, res) {
+app.get("/api/list", async function (_, res) {
   const result = await Newsletter.find().select("email id");
   res.send(result);
 });

@@ -7,11 +7,20 @@ const subscribed = ref(false);
 const typedInput = ref("");
 const submitting = ref(false);
 const isInvalidEmail = ref(false);
+const responseText = ref("");
 
 async function subscribe() {
   if (typedInput.value === "" || isInvalidEmail.value) return;
   submitting.value = true;
-  await new Promise((resolve) => setTimeout(resolve, 3000));
+  await fetch(`http://localhost:8000/api/new`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email: typedInput.value }),
+  })
+    .then((response) => response.json())
+    .then(({ message }) => {
+      responseText.value = message
+    });
   subscribed.value = true;
   submitting.value = false;
 }
@@ -39,7 +48,7 @@ watch(typedInput, async function () {
   <div class="w-full p-5 md:p-6 space-y-5 bg-white shadow-md rounded-xl md:max-w-[600px]">
     <div class="pb-2 space-y-3">
       <h1 class="text-2xl font-black sm:text-2.5xl">
-        Subscribe to {{ person }}&apos;s Newsletter!
+        Subscribe to {{ person }}&apos;s Newsletter! 🚀
       </h1>
       <p class="text-gray-600">
         Receive notifications of high-quality articles about DevOps and other
@@ -49,7 +58,7 @@ watch(typedInput, async function () {
     </div>
     <div v-if="subscribed" class="alert bg-green-100 border-green-500 text-green-700 px-4 py-3 rounded relative"
       role="alert">
-      <span class="block sm:inline">You are now officially a part of the newsletter!</span>
+      <span class="block sm:inline">{{ responseText }}</span>
       <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
           stroke-linecap="round" stroke-linejoin="round">
