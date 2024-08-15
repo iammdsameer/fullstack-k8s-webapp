@@ -13,10 +13,11 @@ services:
 
   backend:
     container_name: backend
+    hostname: backend-service
     build: ./backend
     environment:
       - PORT=9000
-      - MONGODB_URI=mongodb://mongo:27017/newsletter
+      - MONGODB_URI=mongodb://mongodb-service:27017/newsletter
     ports:
       - 9000:9000
     networks:
@@ -26,6 +27,7 @@ services:
 
   db:
     container_name: mongo
+    hostname: mongodb-service
     image: mongo:latest
     networks:
       - net
