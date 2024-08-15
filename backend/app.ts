@@ -47,6 +47,10 @@ app.get("/api/list", async function (_, res) {
   res.send(result);
 });
 
+app.get('*', function(_, res){
+  res.send({status: 404, message: 'What???'});
+});
+
 app.listen(PORT, () => {
   console.log(`Backend is listening on port ${PORT}`);
 });

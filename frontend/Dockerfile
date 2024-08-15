@@ -4,7 +4,6 @@ WORKDIR /src
 COPY package*.json ./
 RUN npm install
 COPY . .
-ENV VITE_API_URL=http://localhost:9000/api
 ENV VITE_PERSON_NAME=Sameer
 RUN npm run build
 

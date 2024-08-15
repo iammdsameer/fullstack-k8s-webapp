@@ -9,12 +9,10 @@ const submitting = ref(false);
 const isInvalidEmail = ref(false);
 const responseText = ref("");
 
-const API_URL = import.meta.env.VITE_API_URL
-
 async function subscribe() {
   if (typedInput.value === "" || isInvalidEmail.value) return;
   submitting.value = true;
-  await fetch(`${API_URL}/new`, {
+  await fetch('/api/new', {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email: typedInput.value }),

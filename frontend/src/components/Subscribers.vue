@@ -6,11 +6,11 @@ type Email = { email: string }[];
 let emailList = ref<Email>([]);
 let loading = ref(true);
 
-const API_URL = import.meta.env.VITE_API_URL
+// const API_URL = import.meta.env.VITE_API_URL
 
 onMounted(() => {
   new Promise(resolve => setTimeout(resolve, 1500))
-    .then(() => fetch(`${API_URL}/list`)
+    .then(() => fetch('/api/list')
       .then((response) => response.json())
       .then((data: Email) => {
         emailList.value = data
