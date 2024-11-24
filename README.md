@@ -1,6 +1,8 @@
 # Deploy and manage a full-stack application on Kubernetes
 
-This project demonstrates the deployment and management of a full-stack application on a Kubernetes cluster, featuring:
+<img src="https://github.com/user-attachments/assets/f3119776-2928-4a37-b6dd-b18eb43cc251" alt="newsletter app demo" height="500" align="center" /><br />
+
+This newsletter project demonstrates the deployment and management of a full-stack web application on a Kubernetes cluster, featuring:
 - Node.js backend
 - MongoDB database
 - Nginx frontend
